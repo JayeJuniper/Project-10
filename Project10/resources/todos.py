@@ -42,7 +42,7 @@ class TodoList(Resource):
     def post(self):
         args = self.reqparse.parse_args()
         todo = models.Todo.create(**args)
-        return (todo, 201, 
+        return (todo, 201,
             {'Location': url_for('resources.todos.todo', id=todo.id)}
         )
 
