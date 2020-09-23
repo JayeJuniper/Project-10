@@ -1,7 +1,5 @@
 import unittest
-import json
 
-from flask import url_for, g
 from peewee import *
 
 from app import app
