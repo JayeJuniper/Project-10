@@ -33,6 +33,8 @@ class TodoList(Resource):
         super().__init__()
 
     def get(self):
+        if not models.Todo.select():
+            abort(404, description='No todos available.')
         todos = [marshal(todo, todo_fields) for todo in models.Todo.select()]
         return todos
 
