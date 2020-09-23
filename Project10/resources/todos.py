@@ -1,4 +1,4 @@
-from flask import make_response, Blueprint, g, jsonify, abort
+from flask import Blueprint, abort
 
 from flask_restful import (Resource, Api, reqparse,
                            inputs, fields, marshal,
@@ -33,11 +33,8 @@ class TodoList(Resource):
         super().__init__()
 
     def get(self):
-        all_todos = models.Todo.select()
-        if not models.Todo.select():
-            abort(404, description='No todos available.')
-        all_todos = [marshal(todo, todo_fields) for todo in models.Todo.select()]
-        return {'todos': all_todos}
+        todos = [marshal(todo, todo_fields) for todo in models.Todo.select()]
+        return todos
 
     @marshal_with(todo_fields)
     def post(self):
